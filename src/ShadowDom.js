@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import styles from './App.styles.scss';
-import mainscss from './index.styles.scss';
+
 
 export class ShadowDom extends Component {
   constructor(props){
@@ -12,16 +11,6 @@ export class ShadowDom extends Component {
   componentDidMount() {
     const { children, delegatesFocus } = this.props;
     this.shadowRoot = this.target.attachShadow({ mode: 'open', delegatesFocus });
-    
-    const style = document.createElement('style');
-    style.textContent = styles;
-        
-    const mainstyle = document.createElement('style');
-    style.textContent = mainscss;
-
-    this.shadowRoot.appendChild(mainstyle);    
-    this.shadowRoot.appendChild(style);
-    console.log("here..");
     render(<Fragment>{ children }</Fragment>, this.shadowRoot)
   }
   componentDidUpdate() {
@@ -41,7 +30,7 @@ export class ShadowDom extends Component {
     const { tag, delegatesFocus, children, lightDom, ...rest } = this.props;
     const ShadowDomTag = tag;
     return (
-      <ShadowDomTag ref={ this.getTargetRef } { ... rest }>
+      <ShadowDomTag id="mainContainer" ref={ this.getTargetRef } { ... rest }>
         { lightDom() }
       </ShadowDomTag>
     );
@@ -54,7 +43,7 @@ ShadowDom.propTypes = {
   lightDom: PropTypes.func,
 }
 ShadowDom.defaultProps = {
-  tag: 'span',
+  tag: 'div',
   delegatesFocus: false,
   lightDom: () => null
 }

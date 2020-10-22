@@ -1,11 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import {ShadowDom} from './ShadowDom';
-import './App.styles.scss';
+import './index.css'; 
+import './app.scss';
 
 function App() {
   return (
-    <ShadowDom>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -22,7 +21,6 @@ function App() {
         </a>
       </header>
     </div>
-    </ShadowDom>
   );
 }
 
