@@ -442,7 +442,17 @@ module.exports = function(webpackEnv) {
                   loader: require.resolve('style-loader'),
                   options: {
                     insertInto: function () {
-                      return document.getElementById('root').shadowRoot;
+                      if(!window.styleLocation){
+                        const elementId = 'widget-style';
+                        const styleWrapperElement = document.createElement('div');
+                        styleWrapperElement.setAttribute('id', elementId);
+                        styleWrapperElement.attachShadow({ mode: 'open' });
+                        document.body.appendChild(styleWrapperElement);
+                        window.styleLocation = elementId;
+                        return document.getElementById(elementId).shadowRoot;
+                      } else {
+                        return document.getElementById(window.styleLocation).shadowRoot;
+                      }
                     },
                   },
                 },
@@ -456,7 +466,17 @@ module.exports = function(webpackEnv) {
                   loader: require.resolve('style-loader'),
                   options: {
                     insertInto: function () {
-                      return document.getElementById('root').shadowRoot;
+                      if(!window.styleLocation){
+                        const elementId = 'widget-style';
+                        const styleWrapperElement = document.createElement('div');
+                        styleWrapperElement.setAttribute('id', elementId);
+                        styleWrapperElement.attachShadow({ mode: 'open' });
+                        document.body.appendChild(styleWrapperElement);
+                        window.styleLocation = elementId;
+                        return document.getElementById(elementId).shadowRoot;
+                      } else {
+                        return document.getElementById(window.styleLocation).shadowRoot;
+                      }
                     },
                   },
                 },

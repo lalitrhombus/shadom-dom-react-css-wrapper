@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import PropTypes from 'prop-types';
 
 
-export class ShadowDom extends Component {
+export default class ShadowDom extends Component {
   constructor(props){
     super(props)
     this.getTargetRef = this.getTargetRef.bind(this);
@@ -11,7 +11,13 @@ export class ShadowDom extends Component {
   componentDidMount() {
     const { children, delegatesFocus } = this.props;
     this.shadowRoot = this.target.attachShadow({ mode: 'open', delegatesFocus });
-    render(<Fragment>{ children }</Fragment>, this.shadowRoot)
+    const styleDiv = document.createElement('div');
+    styleDiv.innerHTML = document.getElementById(window.styleLocation).shadowRoot.innerHTML;
+    const conentDiv = document.createElement('div');
+    this.shadowRoot.appendChild(conentDiv);
+    this.shadowRoot.appendChild(styleDiv);
+
+    render(<Fragment>{ children }</Fragment>, conentDiv)
   }
   componentDidUpdate() {
     const { children } = this.props;

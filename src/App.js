@@ -2,9 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './index.css'; 
 import './app.scss';
+import ShadowDom from './ShadowDom';
+
 
 function App() {
   return (
+    <ShadowDom>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -21,6 +24,7 @@ function App() {
         </a>
       </header>
     </div>
+    </ShadowDom>
   );
 }
 
